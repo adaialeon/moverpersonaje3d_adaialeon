@@ -30,7 +30,8 @@ public class PersonController : MonoBehaviour
     void Update()
     {
         //Movement();
-        MovementTPS();
+        //MovementTPS();
+        MovementTPS2();
         Jump();
 
     }
@@ -53,7 +54,7 @@ public class PersonController : MonoBehaviour
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
-
+        //movimiento con freelook camera
     void Movement()
     {
        Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
@@ -69,8 +70,8 @@ public class PersonController : MonoBehaviour
             controller.Move(moveDirection.normalized * speed * Time.deltaTime);
         }
     }
-
-     void MovementTPS()
+        //movimienti con cirtual camera
+     void MovementTPS2()
     {
         Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
