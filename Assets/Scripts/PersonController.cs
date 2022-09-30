@@ -15,11 +15,14 @@ public class PersonController : MonoBehaviour
     public float sensorRadius = 0.1f;
     public float jumpForce = 5;
     public float jumpHeight = 1;
+    private float turnSmoothVelocity;
+    public float turnSmoothTime = 0.1f;
 
     // Start is called before the first frame update
     void Awake() 
     {
         controller = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -31,8 +34,9 @@ public class PersonController : MonoBehaviour
         {
 
             float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg; 
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
-            transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+            transform.rotation = Quaternion.Euler(0, angle, 0);
 
             controller.Move(move * speed * Time.deltaTime);
         }
@@ -55,4 +59,43 @@ public class PersonController : MonoBehaviour
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
+
+    void Jump()
+    {
+        isGrounded = Physics.CheckSphere(groundSensor.position, sensorRadius, ground);
+
+        if(isGrounded && playerVelocity.y <0)
+        {
+            playerVelocity.y = 0;
+        }
+
+        if(Input.GetButtonDown("Jump") && isGrounded)
+        {
+            //playerVelocity.y += jumpForce;
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        }
+
+        playerVelocity.y += gravity * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    void Movement()
+    {
+        isGrounded = Physics.CheckSphere(groundSensor.position, sensorRadius, ground);
+
+        if(isGrounded && playerVelocity.y <0)
+        {
+            playerVelocity.y = 0;
+        }
+
+        if(Input.GetButtonDown("Jump") && isGrounded)
+        {
+            //playerVelocity.y += jumpForce;
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        }
+
+        playerVelocity.y += gravity * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
+
 }
