@@ -17,6 +17,7 @@ public class PersonController : MonoBehaviour
     public float jumpHeight = 1;
     private float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
+    public Transform cam;
 
     // Start is called before the first frame update
     void Awake() 
@@ -33,7 +34,7 @@ public class PersonController : MonoBehaviour
         if(move != Vector3.zero)
         {
 
-            float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg; 
+            float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + cam.eulerAngles.y; 
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
             transform.rotation = Quaternion.Euler(0, angle, 0);

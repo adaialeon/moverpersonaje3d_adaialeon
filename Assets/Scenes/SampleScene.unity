@@ -1136,7 +1136,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251492571}
-  m_LocalRotation: {x: 0.066316046, y: 0.000000017168505, z: -0.0000000011410591, w: 0.9977987}
+  m_LocalRotation: {x: 0.066316046, y: -0.000000017168505, z: 0.0000000011410591, w: 0.9977987}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1251,6 +1251,8 @@ MonoBehaviour:
   sensorRadius: 0.1
   jumpForce: 10
   jumpHeight: 2
+  turnSmoothTime: 0.1
+  cam: {fileID: 963194228}
 --- !u!1 &1764412502
 GameObject:
   m_ObjectHideFlags: 3
