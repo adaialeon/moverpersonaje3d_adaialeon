@@ -38,8 +38,8 @@ public class PersonController : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
             transform.rotation = Quaternion.Euler(0, angle, 0);
-
-            controller.Move(move * speed * Time.deltaTime);
+            Vector3 moveDirection = Quaternion.Euler (0f, targetAngle, 0) * Vector3.forward;
+            controller.Move(moveDirection.normalized * speed * Time.deltaTime);
         }
 
         //isGrounded = controller.isGrounded;
