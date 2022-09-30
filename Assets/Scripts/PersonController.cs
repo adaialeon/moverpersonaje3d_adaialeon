@@ -78,7 +78,7 @@ public class PersonController : MonoBehaviour
         {
 
             float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + cam.eulerAngles.y; 
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
 
             transform.rotation = Quaternion.Euler(0, angle, 0);
             Vector3 moveDirection = Quaternion.Euler (0f, targetAngle, 0) * Vector3.forward;
