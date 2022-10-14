@@ -17,6 +17,15 @@ public class FirstPersonController : MonoBehaviour
     //almacenar el float xrotation
     public float xRotation = 0f;
 
+    //sensores para que el personaje detecte el suelo
+    bool isGrounded;
+    public Transform groundSensor;
+    public float sensorRadius;
+    public LayerMask ground;
+    public float gravity = -9.81f;
+    public float jumpHeight = 2f;
+    Vector3 playerVelocity; 
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -42,8 +51,42 @@ public class FirstPersonController : MonoBehaviour
         //este no funciona porque no mueve la posaicion de la camara de 0
         //fpsCamera.rotation = Quaternion(Euler.mouseY, 0, 0);
         //transform.Rotate(Vector3.up * mouseX);
-
         fpsCamera.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(Vector3.up * mouseX);
+
+        //movimiento del personaje y almacenamos el Input de movimiento
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        //movimiento libre del perosnaje 
+        Vector3 move = new Vector3(x, 0, z);
+        controller.Move(move.normalized * speed * Time.deltaTime);
+
+        //multiplicamos los transforms del personaje para que se mueva hacia donde enfoca el raton, direccion donde mira (move to Move)
+        Vector3 Move = transform.right * x + transform.forward * z;
+
+        Jump();
+
+    }
+
+        //gravedad dy salto del personaje
+        void Jump()
+    {
+        isGrounded = Physics.CheckSphere(groundSensor.position, sensorRadius, ground);
+
+        if(isGrounded && playerVelocity.y <0)
+        {
+            playerVelocity.y = 0;
+        }
+
+        if(Input.GetButtonDown("Jump") && isGrounded)
+        {
+            //playerVelocity.y += jumpForce;
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        }
+
+        playerVelocity.y += gravity * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 }
+

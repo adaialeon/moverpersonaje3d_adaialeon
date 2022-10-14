@@ -374,6 +374,13 @@ MonoBehaviour:
   sensitivity: 200
   speed: 15
   xRotation: 0
+  groundSensor: {fileID: 1696832137}
+  sensorRadius: 0.2
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
+  gravity: -9.81
+  jumpHeight: 2
 --- !u!1 &190156985
 GameObject:
   m_ObjectHideFlags: 0
