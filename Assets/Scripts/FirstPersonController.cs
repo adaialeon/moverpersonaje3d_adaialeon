@@ -58,12 +58,11 @@ public class FirstPersonController : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        //movimiento libre del perosnaje 
-        Vector3 move = new Vector3(x, 0, z);
-        controller.Move(move.normalized * speed * Time.deltaTime);
-
         //multiplicamos los transforms del personaje para que se mueva hacia donde enfoca el raton, direccion donde mira (move to Move)
-        Vector3 Move = transform.right * x + transform.forward * z;
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        //movimiento libre del perosnaje 
+        controller.Move(move.normalized * speed * Time.deltaTime);
 
         Jump();
 
