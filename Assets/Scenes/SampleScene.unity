@@ -1150,7 +1150,7 @@ GameObject:
   - component: {fileID: 595719144}
   - component: {fileID: 595719147}
   - component: {fileID: 595719146}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1166,7 @@ Transform:
   m_GameObject: {fileID: 595719143}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 9, y: 9, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 143720910}
@@ -3081,7 +3081,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
