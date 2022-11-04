@@ -33,7 +33,7 @@ public class PersonController : MonoBehaviour
         void Awake() 
     {
         controller = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
         // Update is called once per frame
@@ -69,6 +69,7 @@ public class PersonController : MonoBehaviour
             if(Physics.Raycast(ray, out hit2))
             {
                 Debug.Log(hit2.point);
+                transform.position = new Vector3(hit2.point.x, transform.position.y, hit2.point.z);
             }
         }
         
