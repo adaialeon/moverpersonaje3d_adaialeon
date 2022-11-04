@@ -5,17 +5,20 @@ using UnityEngine;
 public class PersonController : MonoBehaviour
 {
 
-        private CharacterController controller;
+    
+        [SerializeField]private CharacterController controller;
+        [Header("Fisicas")]
         public float speed = 5; 
-        private Vector3 playerVelocity;
+         [SerializeField]private Vector3 playerVelocity;
         public float gravity = -9.81f; 
+        [Header("Sensor suelo")]
         public bool isGrounded; 
         public Transform groundSensor;
         public LayerMask ground;
         public float sensorRadius = 0.1f;
         public float jumpForce = 5;
         public float jumpHeight = 1;
-        private float turnSmoothVelocity;
+        [SerializeField]private float turnSmoothVelocity;
         public float turnSmoothTime = 0.1f;
         public Transform cam;
         public Transform LookAtTransform; 
