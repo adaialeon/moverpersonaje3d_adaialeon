@@ -62,10 +62,6 @@ public class PersonController : MonoBehaviour
         }
 
 
-
-
-
-
     }
 
         void Jump()
@@ -166,5 +162,17 @@ public class PersonController : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler (0f, targetAngle, 0) * Vector3.forward;
             controller.Move(moveDirection.normalized * speed * Time.deltaTime);
     }   }
+
+        
+        
+        
+        void OnDrawGizmos() 
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawRay(transform.position, transform.forward * 20f);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(groundSensor.position, sensorRadius);
+        }
 
 }
