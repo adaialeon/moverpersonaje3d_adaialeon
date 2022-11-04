@@ -53,6 +53,9 @@ public class PersonController : MonoBehaviour
             playerVelocity.y = 0;
         }
 
+        //disparar rayos
+        isGrounded = Physics.RayCast(groundSensor.position, Vector3.down, sensorRadius, ground);
+
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             //playerVelocity.y += jumpForce;
