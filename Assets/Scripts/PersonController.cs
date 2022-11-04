@@ -61,6 +61,18 @@ public class PersonController : MonoBehaviour
             Debug.DrawRay(transform.position, transform.forward * 20f, Color.red);    
         }
 
+        
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit2;
+            if(Physics.Raycast(ray, out hit2))
+            {
+                Debug.Log(hit2.point);
+            }
+        }
+        
+
 
     }
 
@@ -166,7 +178,7 @@ public class PersonController : MonoBehaviour
         
         
         
-        void OnDrawGizmos() 
+        void OnDrawGizmosSelected() 
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawRay(transform.position, transform.forward * 20f);
