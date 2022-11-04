@@ -24,6 +24,8 @@ public class PersonController : MonoBehaviour
         public Cinemachine.AxisState yAxis;
         //crear listas (en este caso de las camaras de la escena)
         public GameObject[] cameras;
+        //para poder usar el Raycast
+        public LayerMask rayLayer;
 
     
 
@@ -38,9 +40,31 @@ public class PersonController : MonoBehaviour
         void Update()
     {
         //Movement();
-        //MovementTPS();
-        MovementTPS2();
+        MovementTPS();
+        //MovementTPS2();
         Jump();
+
+        //almacena la informacion del rayo
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.forward, out hit, 20f, rayLayer))
+        {
+            Vector3 hitPosition = hit.point; 
+            float hitDistance = hit.distance;
+            string hitName = hit.transform.name;
+            //Animator hitAnimator = hit.transform.GameObject.GetComponent<Animator>();
+            //hit.transform.GameObject.GetComponent<ScriptRandom>().FuincionRandom(); Podemos llamar funciones de otros scripts
+            Debug.DrawRay(transform.position, transform.forward * 20f, Color.green);
+            Debug.Log("posicion impacto" + hitPosition + "distancia impacto" + hitDistance + "nombre objeto" + hitName);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.forward * 20f, Color.red);    
+        }
+
+
+
+
+
 
     }
 
@@ -53,8 +77,20 @@ public class PersonController : MonoBehaviour
             playerVelocity.y = 0;
         }
 
+
         //disparar rayos
-        isGrounded = Physics.RayCast(groundSensor.position, Vector3.down, sensorRadius, ground);
+        //isGrounded = Physics.Raycast(groundSensor.position, Vector3.down, sensorRadius, ground);
+        if(Physics.Raycast(groundSensor.position, Vector3.down, sensorRadius, ground))
+        {
+            isGrounded = true;
+            Debug.DrawRay(groundSensor.position, Vector3.down * sensorRadius, Color.green);
+        }
+        else
+        {
+            isGrounded = false;
+            Debug.DrawRay(groundSensor.position, Vector3.down * sensorRadius, Color.red);
+        }
+
 
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
